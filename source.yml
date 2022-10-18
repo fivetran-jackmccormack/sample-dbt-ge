@@ -1,0 +1,10 @@
+version: 2
+    
+sources:
+  - name: sql_server_cli12345
+    tables: $sql_tables
+      - name: Teachers
+      - name: Students
+
+  - name: sql_server_cli12245
+    tables: *sql_tables

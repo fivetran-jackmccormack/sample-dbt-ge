@@ -25,6 +25,10 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 
+vars:
+  # The `cli_schemas` variable will be accessible in all resources
+  cli_schemas: ['cli12345','cli12245']
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
@@ -34,5 +38,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   isams:
     # Config indicated by + and applies to all files under models/example/
-    sqlServer:
-      +materialized: view
+    #sqlServer:
+      #+materialized: view
+
+
