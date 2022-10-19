@@ -7,13 +7,14 @@
     ID,
     LastName,
     FirstName,
-    Subject,
-    _fivetran_synced
+    Subject
   from {{ schema }}.teachers
-  {% if is_incremental() %}
+
+{% if is_incremental() %}
 
   -- this filter will only be applied on an incremental run
-  where _fivetran_synced > (select max(update_started) from {{ schema.fivetran_audit }})
+  where _fivetran_synced > (select max(update_started) from {{ schema }}.fivetran_audit
+  where table = '{{ schema }}' and update_started not in (select max(update_started) from {{ schema }}.fivetran_audit where table = '{{ schema }}'))
 
 {% endif %}
 )
