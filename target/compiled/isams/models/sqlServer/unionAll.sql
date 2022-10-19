@@ -13,7 +13,8 @@
 
 
   -- this filter will only be applied on an incremental run
-  where _fivetran_synced > (select max(update_started) from cli12345_dbo.fivetran_audit)
+  where _fivetran_synced > (select max(update_started) from cli12345_dbo.fivetran_audit
+  where table = 'teachers' and update_started not in (select max(update_started) from cli12345_dbo.fivetran_audit where table = 'teachers'))
 
 
 )
@@ -33,7 +34,8 @@ union all
 
 
   -- this filter will only be applied on an incremental run
-  where _fivetran_synced > (select max(update_started) from cli12245_dbo.fivetran_audit)
+  where _fivetran_synced > (select max(update_started) from cli12245_dbo.fivetran_audit
+  where table = 'teachers' and update_started not in (select max(update_started) from cli12245_dbo.fivetran_audit where table = 'teachers'))
 
 
 )
