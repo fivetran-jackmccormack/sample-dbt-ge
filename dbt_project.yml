@@ -27,7 +27,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 vars:
   # The `cli_schemas` variable will be accessible in all resources
-  cli_schemas: ['cli12345','cli12245']
+  schema_names: ['cli12345','cli12245']
+  #column_names_teachers: {{ ('ID','FirstName', 'SecondName', 'Subject') }}
+  #column_names_students: {{ ('ID','FirstName', 'SecondName', 'Age') }}
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -38,7 +40,7 @@ vars:
 models:
   isams:
     # Config indicated by + and applies to all files under models/example/
-    #sqlServer:
-      #+materialized: view
+    sqlServer:
+      +materialized: view
 
 

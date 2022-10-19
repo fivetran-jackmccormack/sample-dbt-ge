@@ -1,5 +1,3 @@
-select * from (
-
 {% set var schema_names=('cli12345', 'cli12345') %}
 
 
@@ -20,6 +18,4 @@ select * from (
 union all
 {% endif %}
 {% endfor %}
-)
-
 )
