@@ -1,0 +1,3 @@
+select * from (
+{{ get_union_table('teachers') }} 
+)

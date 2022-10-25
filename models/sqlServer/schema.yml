@@ -2,7 +2,7 @@
 version: 2
 
 models:
-  - name: unionAll
+  - name: unionTeachers
     description: "A dbt model to union data from many SQL Server Schemas"
     columns:
       - name: id
@@ -11,8 +11,8 @@ models:
           - unique
           - not_null
 
-  - name: ref
-    description: "A starter dbt model"
+  - name: unionStudents
+    description: "A dbt model to union data from many SQL Server Schemas"
     columns:
       - name: id
         description: "The primary key for this table"
