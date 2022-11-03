@@ -1,3 +1,2 @@
-select * from (
-{{ get_union_table('teachers') }} 
-)
+select * from {{ ref('relations') }}
+
