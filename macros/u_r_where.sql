@@ -1,4 +1,4 @@
-{%- macro union_relations_where(relations, tableName, column_override=none, include=[], exclude=[], source_column_name='_dbt_source_relation') -%}
+{%- macro u_r_where(relations, tableName, column_override=none, include=[], exclude=[], source_column_name='_dbt_source_relation') -%}
 
     {%- if exclude and include -%}
         {{ exceptions.raise_compiler_error("Both an exclude and include list were provided to the `union` macro. Only one is allowed") }}
@@ -93,7 +93,7 @@
     {%- for relation in relations %}
 
         (
-            select
+            selectt
 
                 {%- if source_column_name is not none %}
                 cast({{ string_literal(relation) }} as {{ type_string() }}) as {{ source_column_name }},
@@ -111,8 +111,8 @@
             from {{ relation }}
 
             --{% if is_incremental -%}
-                where _fivetran_synced > (select max(_fivetran_synced) from relation.schema.fivetran_audit
-                where table = '{{ tableName }}' and update_started not in (select max(_fivetran_synced) from relation.schema.fivetran_audit where table = '{{ tableName }}'))
+            where _fivetran_synced > (select max(_fivetran_synced) from relation.schema.fivetran_audit
+            where table = '{{ tableName }}' and update_started not in (select max(_fivetran_synced) from relation.schema.fivetran_audit where table = '{{ tableName }}'))
             --{%- endif %}
         )
 
