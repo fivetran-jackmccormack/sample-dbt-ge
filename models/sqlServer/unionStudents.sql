@@ -1,3 +1,1 @@
-select * from (
-{{ get_union_table('students') }}
-)
+select * from ({{ get_union_table('students') }})
