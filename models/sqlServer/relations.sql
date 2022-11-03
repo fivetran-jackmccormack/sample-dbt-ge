@@ -4,7 +4,8 @@
 
 
 --{% if is_incremental() %}
-{{ union_relations_where(relations=event_relations, tableName='teachers') }}
+{{ u_r_where(relations=event_relations, tableName='teachers') }}
+
 --{% endif %}
 
 --{{ dbt_utils.union_relations(relations=event_relations) }}
