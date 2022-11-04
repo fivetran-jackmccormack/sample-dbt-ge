@@ -110,9 +110,9 @@
 
             from {{ relation }}
 
-            {% if is_incremental -%}
-                where _fivetran_synced > (select max(_fivetran_synced) from relation.schema.fivetran_audit where table = '{{ tableName }}' and update_started not in (select max(_fivetran_synced) from relation.schema.fivetran_audit where table = '{{ tableName }}'))
-            {%- endif %}
+            {% if is_incremental() %}
+                where _fivetran_synced > (select _fivetran_synced from {{ relation.schema }}.fivetran_audit where table = '{{ tableName }}' and _fivetran_synced = ( select max(_fivetran_synced) from {{ relation.schema }}.fivetran_audit where _fivetran_synced < ( select max(_fivetran_synced) from {{ relation.schema }}.fivetran_audit)))
+            {% endif %}
         )
 
         {% if not loop.last -%}

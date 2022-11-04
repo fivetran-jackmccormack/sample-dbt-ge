@@ -39,6 +39,11 @@ vars:
 models:
   isams:
     sqlServer:
+      unionTeachers:
+        +on_schema_change: "sync_all_columns"
+        materialized: 'incremental'
+        unique_key: 'ID'
+        incremental_strategy: 'merge'
       unionStudents:
         +on_schema_change: "sync_all_columns"
         materialized: 'incremental'

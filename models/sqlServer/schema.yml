@@ -4,7 +4,24 @@ version: 2
 models:
 
 
-
+- name: unionTeachers
+  description: "A dbt model to union TEACHER data from many SQL Server Schemas"
+  tests: 
+  - dbt_expectations.expect_table_columns_to_match_set:
+        column_list: ["ID", "LastName", "FirstName", "Subject","Schema_Name","_fivetran_deleted","_fivetran_synced"]
+        transform: upper
+  - dbt_expectations.expect_table_column_count_to_equal:
+        value: 7
+  - dbt_expectations.expect_table_columns_to_not_contain_set:
+        column_list: ["Age", "Address"]
+  columns:
+    - name: id
+      description: "The primary key for this table"
+      tests:
+        - unique
+        - not_null
+        - dbt_expectations.expect_column_to_exist
+        
 - name: unionStudents
   description: "A dbt model to union STUDENT data from many SQL Server Schemas"
   tests: 
@@ -36,8 +53,6 @@ models:
 - name: relations
   description: "To get relations from db"
 
-- name: teachRelations
-  description: "To get relations from db"
 
 
 
