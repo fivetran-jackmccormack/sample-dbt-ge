@@ -21,7 +21,7 @@ models:
         - unique
         - not_null
         - dbt_expectations.expect_column_to_exist
-        
+
 - name: unionStudents
   description: "A dbt model to union STUDENT data from many SQL Server Schemas"
   tests: 
@@ -49,10 +49,6 @@ models:
               #group_by: [group_id, other_group_id, ...] # (Optional)
               row_condition: "id is not null" # (Optional)
               strictly: false # (Optional. Default is 'false'. Adds an 'or equal to' to the comparison operator for min/max)
-
-- name: relations
-  description: "To get relations from db"
-
 
 
 

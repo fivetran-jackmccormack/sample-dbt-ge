@@ -1,4 +1,4 @@
-{%- macro union_relations_where(relations, tableName, column_override=none, include=[], exclude=[], source_column_name='_dbt_source_relation') -%}
+{%- macro union_relations_where(relations, column_override=none, include=[], exclude=[], source_column_name='_dbt_source_relation') -%}
 
     {%- if exclude and include -%}
         {{ exceptions.raise_compiler_error("Both an exclude and include list were provided to the `union` macro. Only one is allowed") }}
@@ -111,7 +111,7 @@
             from {{ relation }}
 
             {% if is_incremental() %}
-                where _fivetran_synced > (select _fivetran_synced from {{ relation.schema }}.fivetran_audit where table = '{{ tableName }}' and _fivetran_synced = ( select max(_fivetran_synced) from {{ relation.schema }}.fivetran_audit where _fivetran_synced < ( select max(_fivetran_synced) from {{ relation.schema }}.fivetran_audit)))
+                where _fivetran_synced > (select _fivetran_synced from {{ relation.schema }}.fivetran_audit where table = '{{ relation.identifier }}' and _fivetran_synced = ( select max(_fivetran_synced) from {{ relation.schema }}.fivetran_audit where _fivetran_synced < ( select max(_fivetran_synced) from {{ relation.schema }}.fivetran_audit)))
             {% endif %}
         )
 

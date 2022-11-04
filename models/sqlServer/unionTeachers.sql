@@ -2,7 +2,7 @@
 
 with relationsJoined as (
 
-    select *  from {{ union_relations_where(relations=event_relations, tableName='teachers') }}
+    select *  from {{ union_relations_where(relations=event_relations) }}
 )
 
 
