@@ -4,7 +4,7 @@
 
 
 --{% if is_incremental() %}
-{{ u_r_where(relations=event_relations, tableName='teachers') }}
+{{ union_relations_where(relations=event_relations, tableName='teachers') }}
 
 --{% endif %}
 
