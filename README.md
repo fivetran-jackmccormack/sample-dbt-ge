@@ -5,7 +5,7 @@ Welcome to a simple incremental example dbt project!
 Try running the following commands:
 - dbt run
 - dbt test
-- dbt run --full-refresh to run in non-incremental mode
+- dbt run --full-refresh (to run in non-incremental mode)
 
 
 ### Resources:
